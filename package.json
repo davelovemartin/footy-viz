@@ -1,5 +1,5 @@
 {
-  "name": "next-starter",
+  "name": "footy-viz",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -32,5 +32,8 @@
     "husky": "4",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
-  }
+  },
+  "description": "simple front-end application to load and display some football data",
+  "repository": "git@github.com:davelovemartin/footy-viz.git",
+  "author": "davelovemartin <justanotherdavemartin@gmail.com>"
 }

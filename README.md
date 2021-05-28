@@ -1,8 +1,29 @@
-# next-starter
+# Footy Visualisation
 
-A starter for your next [next.js](https://nextjs.org/) project.
+## Table of contents
+
++ [brief](#brief)
++ [getting_started](#getting_started)
++ [decisions](#decisions)
+
+## Brief <a name = "brief"></a>
+
+> Create a simple front-end application to load and display some football data.
+
+- display some sort of visualisation of the data,
+- include some sort of interactive filtering that updates the viz in realtime,
+- persist the user's last filters and selections across
+  browser sessions.
+
+## Getting started <a name = "getting_started"></a>
 
 Uses Node.js v12.13.0
+
+Install dependencies: `yarn install`
+
+Run locally: `yarn start`
+
+### Development
 
 `yarn dev/start/build` to run Next dev/start/build commands
 
@@ -16,28 +37,6 @@ Husky runs a `pre-commit` git hook so `lint-staged` will run `eslint`, `prettier
 
 I recommend you use VS Code with eslint and prettier extensions.
 
-Forking this repo:
+## Decisions <a name = "decisions"></a>
 
-1. Create a new repository for your fork
-On GitHub, create your new (empty) repository [https://github.com/new](https://github.com/new), using the default settings. This will be your forked repository.
-
-2. Clone your fork
-Make a local copy of your new forked repository using git clone.
-
-`git clone https://github.com/<username>/<forked-repo>.git`
-
-3. Add your original repository as an Upstream Remote
-Add your original repository as an upstream remote in your forked repository. Doing this will allow you to pull in changes from your original repository to your forked repository.
-
-`cd <forked-repo>`
-`git remote add upstream https://github.com/cxpartners/next-starter.git`
-
-4. Update your fork
-Update your fork with all the changes from your original repository using `git pull`.
-
-`git pull upstream master`
-
-5. Push
-When you are done, simply push your new fork back into GitHub.
-
-`git push origin master`
+A record of decisions made can be found in the [docs](docs/README.md).
