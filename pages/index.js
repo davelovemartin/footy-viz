@@ -1,16 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import useSWR from 'swr'
-
-const fetcher = async (url) => {
-  const res = await fetch(url)
-  const data = await res.json()
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-  return data
-}
+import fetcher from '../utilities/fetcher'
 
 export default function Home() {
   const { data, error } = useSWR('/api/test/', fetcher)
