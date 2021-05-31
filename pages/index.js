@@ -1,8 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
 import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
+import ToggleList from '../components/ToggleList'
+import Toggle from '../components/Toggle'
 
 export async function getStaticProps() {
+  // @todo: handle paths in different environments
   const res = await fetch('http://localhost:3000/api/test')
   const data = await res.json()
 
@@ -14,8 +17,38 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  const [filter, setFilter] = useSetStateWithLocalStorage('filter', 'all')
+  // set state for filters
+  const [filterLastSixteen, setFilterLastSixteen] = useSetStateWithLocalStorage(
+    'filterLastSixteen',
+    true,
+  )
+  const [
+    filterQuarterFinals,
+    setFilterQuarterFinals,
+  ] = useSetStateWithLocalStorage('filterQuarterFinals', true)
+  const [filterSemiFinals, setFilterSemiFinals] = useSetStateWithLocalStorage(
+    'filterSemiFinals',
+    true,
+  )
+  const [filterPlayOff, setFilterPlayOff] = useSetStateWithLocalStorage(
+    'filterPlayOff',
+    true,
+  )
+  const [filterFinal, setFilterFinal] = useSetStateWithLocalStorage(
+    'filterFinal',
+    true,
+  )
+
+  // pass data from api as props
   const { data, error } = props
+
+  const handleShowAll = () => {
+    setFilterLastSixteen(true)
+    setFilterQuarterFinals(true)
+    setFilterSemiFinals(true)
+    setFilterPlayOff(true)
+    setFilterFinal(true)
+  }
 
   return (
     <div className="container">
@@ -33,29 +66,46 @@ export default function Home(props) {
       <main>
         <section className="filters">
           <header>filters</header>
-          <div>
-            <button type="button" onClick={() => setFilter('round of 16')}>
-              round of 16
-            </button>
-            <button type="button" onClick={() => setFilter('quarter-finals')}>
-              quarter-finals
-            </button>
-            <button type="button" onClick={() => setFilter('semi-final')}>
-              semi-final
-            </button>
-            <button type="button" onClick={() => setFilter('play off')}>
-              play off
-            </button>
-            <button type="button" onClick={() => setFilter('final')}>
-              final
-            </button>
-          </div>
-          <button type="button" onClick={() => setFilter('all')}>
+          <ToggleList>
+            <Toggle
+              onClick={() => setFilterLastSixteen(!filterLastSixteen)}
+              label="round of 16"
+              isToggleOn={filterLastSixteen}
+            />
+            <Toggle
+              onClick={() => setFilterQuarterFinals(!filterQuarterFinals)}
+              label="quarter-finals"
+              isToggleOn={filterQuarterFinals}
+            />
+            <Toggle
+              onClick={() => setFilterSemiFinals(!filterSemiFinals)}
+              label="semi-final"
+              isToggleOn={filterSemiFinals}
+            />
+            <Toggle
+              onClick={() => setFilterPlayOff(!filterPlayOff)}
+              label="play off"
+              isToggleOn={filterPlayOff}
+            />
+            <Toggle
+              onClick={() => setFilterFinal(!filterFinal)}
+              label="final"
+              isToggleOn={filterFinal}
+            />
+          </ToggleList>
+          <button
+            type="button"
+            onClick={handleShowAll}
+            disabled={
+              filterLastSixteen &&
+              filterQuarterFinals &&
+              filterSemiFinals &&
+              filterPlayOff &&
+              filterFinal
+            }
+          >
             show all rounds
           </button>
-        </section>
-        <section>
-          <header>filter selected: {filter}</header>
         </section>
       </main>
     </div>

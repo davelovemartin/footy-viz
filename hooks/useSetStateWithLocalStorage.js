@@ -2,7 +2,7 @@ import React from 'react'
 
 const isWindow = typeof window !== 'undefined'
 
-export default function useSetStateWithLocalStorage(defaultValue, key) {
+export default function useSetStateWithLocalStorage(key, defaultValue) {
   // pass our function to setState
   const [value, setValue] = React.useState(() => {
     // use key to store data in localStorage
