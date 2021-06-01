@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
 import ToggleList from '../components/ToggleList'
@@ -18,6 +18,10 @@ export async function getStaticProps() {
 
 export default function Home(props) {
   // set state for filters
+  const [areAllFiltersOn, setAreAllFiltersOn] = useState(
+    'areAllFiltersOn',
+    true,
+  )
   const [filterLastSixteen, setFilterLastSixteen] = useSetStateWithLocalStorage(
     'filterLastSixteen',
     true,
@@ -38,6 +42,28 @@ export default function Home(props) {
     'filterFinal',
     true,
   )
+
+  // handle changes in filters
+
+  useEffect(() => {
+    if (
+      filterLastSixteen &&
+      filterQuarterFinals &&
+      filterSemiFinals &&
+      filterPlayOff &&
+      filterFinal
+    ) {
+      setAreAllFiltersOn(true)
+    } else {
+      setAreAllFiltersOn(false)
+    }
+  }, [
+    filterLastSixteen,
+    filterQuarterFinals,
+    filterSemiFinals,
+    filterPlayOff,
+    filterFinal,
+  ])
 
   // pass data from api as props
   const { data, error } = props
@@ -96,13 +122,7 @@ export default function Home(props) {
           <button
             type="button"
             onClick={handleShowAll}
-            disabled={
-              filterLastSixteen &&
-              filterQuarterFinals &&
-              filterSemiFinals &&
-              filterPlayOff &&
-              filterFinal
-            }
+            disabled={areAllFiltersOn}
           >
             show all rounds
           </button>
