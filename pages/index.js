@@ -20,6 +20,7 @@ export default function Home(props) {
     'areAllFiltersOn',
     true,
   )
+  const [filteredData, setFilteredData] = useState(playerData.stats)
   const [filterLastSixteen, setFilterLastSixteen] = useSetStateWithLocalStorage(
     'filterLastSixteen',
     true,
@@ -55,7 +56,18 @@ export default function Home(props) {
     } else {
       setAreAllFiltersOn(false)
     }
+    setFilteredData(
+      playerData.stats.filter(
+        (stat) =>
+          (stat.match_round === 'round of 16' && filterLastSixteen) ||
+          (stat.match_round === 'quarter-finals' && filterQuarterFinals) ||
+          (stat.match_round === 'semi-finals' && filterSemiFinals) ||
+          (stat.match_round === 'play-off' && filterPlayOff) ||
+          (stat.match_round === 'final' && filterFinal),
+      ),
+    )
   }, [
+    playerData,
     filterLastSixteen,
     filterQuarterFinals,
     filterSemiFinals,
@@ -97,7 +109,7 @@ export default function Home(props) {
             />
             <Toggle
               onClick={() => setFilterSemiFinals(!filterSemiFinals)}
-              label="semi-final"
+              label="semi-finals"
               isToggleOn={filterSemiFinals}
             />
             <Toggle
@@ -120,10 +132,10 @@ export default function Home(props) {
           </button>
         </section>
         <section>
-          {playerData ? (
+          {filteredData ? (
             <table>
               <tbody>
-                {playerData.stats.map((row) => (
+                {filteredData.map((row) => (
                   <tr key={row.player_name + row.match_round}>
                     <td>{row.match_round}</td>
                     <td>{row.player_name}</td>

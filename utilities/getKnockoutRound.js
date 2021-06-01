@@ -26,9 +26,9 @@ export default function getKnockoutRound(string) {
     case '07/07/2018 21:00':
       return 'quarter-finals'
     case '10/07/2018 21:00':
-      return 'semi-final'
+      return 'semi-finals'
     case '11/07/2018 21:00':
-      return 'semi-final'
+      return 'semi-finals'
     case '14/07/2018 17:00':
       return 'play off'
     case '15/07/2018 18:00':
