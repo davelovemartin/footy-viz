@@ -26,7 +26,7 @@ export default function handler(req, res) {
 
   // augment stats with data from match dataset by comparing:
   // - match_id to get match_date and get knockout round
-  // - player_id to get player_name or player_known_name
+  // - player_id to get player_name or player_known_name and replace '?' with 'ć'
   // - team_id to get team_name, team_first_color
 
   const stats = abridgedStats.map(
@@ -38,13 +38,15 @@ export default function handler(req, res) {
         (element) => element.player_id === player_id,
       )
       const teamRecord = teamData.find((element) => element.team_id === team_id)
-
       const match_round = getKnockoutRound(matchRecord.match_date)
+      const player_name = (
+        playerRecord.player_known_name || playerRecord.player_name
+      ).replace(/\?/g, 'ć')
 
       // return augmentedData
       return {
         match_round,
-        player_name: playerRecord.player_known_name || playerRecord.player_name,
+        player_name,
         team_name: teamRecord.team_name,
         team_first_color: teamRecord.team_first_color,
         ...fields,
