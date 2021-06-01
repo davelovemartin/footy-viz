@@ -5,18 +5,16 @@ import ToggleList from '../components/ToggleList'
 import Toggle from '../components/Toggle'
 
 export async function getStaticProps() {
+  // @todo: error handling with try/catch
   // @todo: handle paths in different environments
-  const res = await fetch('http://localhost:3000/api/test')
-  const data = await res.json()
+  const fetchPlayers = await fetch('http://localhost:3000/api/players')
+  const playerData = await fetchPlayers.json()
 
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-
-  return { props: { data } }
+  return { props: { playerData } }
 }
 
 export default function Home(props) {
+  const { playerData } = props
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
     'areAllFiltersOn',
@@ -65,9 +63,6 @@ export default function Home(props) {
     filterFinal,
   ])
 
-  // pass data from api as props
-  const { data, error } = props
-
   const handleShowAll = () => {
     setFilterLastSixteen(true)
     setFilterQuarterFinals(true)
@@ -85,9 +80,6 @@ export default function Home(props) {
       <header>
         <h1 className="title">Footy Viz</h1>
         <p>Stats from the knockout stages of the 2018 World Cup.</p>
-        {error && <p>{error.message}</p>}
-        {!data && !error && <p>Loading...</p>}
-        {data && <p>Status: {data.status}</p>}
       </header>
       <main>
         <section className="filters">
@@ -126,6 +118,27 @@ export default function Home(props) {
           >
             show all rounds
           </button>
+        </section>
+        <section>
+          {playerData ? (
+            <table>
+              <tbody>
+                {playerData.stats.map((row) => (
+                  <tr key={row.player_name + row.match_round}>
+                    <td>{row.match_round}</td>
+                    <td>{row.player_name}</td>
+                    <td>{row.team_name}</td>
+                    <td>{row.team_first_color}</td>
+                    <td>{row.xg}</td>
+                    <td>{row.shots}</td>
+                    <td>{row.goals}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>loading</p>
+          )}
         </section>
       </main>
     </div>
