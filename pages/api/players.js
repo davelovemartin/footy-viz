@@ -16,7 +16,9 @@ export default function handler(req, res) {
       interceptions,
       pressures,
       passes,
-      completed_passes,
+      xg,
+      goals,
+      shots,
       left_foot_passes,
       right_foot_passes,
       player_shots_faced,
@@ -47,13 +49,13 @@ export default function handler(req, res) {
       return {
         match_round,
         player_name,
+        player_id,
         team_name: teamRecord.team_name,
         team_first_color: teamRecord.team_first_color,
         ...fields,
       }
     },
   )
-  console.log(stats)
 
   if (stats) {
     res.status(200).json({ stats })

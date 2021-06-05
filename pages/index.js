@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
 import ToggleList from '../components/ToggleList'
 import Toggle from '../components/Toggle'
+import combineStats from '../utilities/combineStats'
 
 export async function getStaticProps() {
   // @todo: error handling with try/catch
@@ -15,6 +17,7 @@ export async function getStaticProps() {
 
 export default function Home(props) {
   const { playerData } = props
+
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
     'areAllFiltersOn',
@@ -135,15 +138,13 @@ export default function Home(props) {
           {filteredData ? (
             <table>
               <tbody>
-                {filteredData.map((row) => (
+                {combineStats(filteredData).map((row) => (
                   <tr key={row.player_name + row.match_round}>
                     <td>{row.match_round}</td>
                     <td>{row.player_name}</td>
                     <td>{row.team_name}</td>
                     <td>{row.team_first_color}</td>
-                    <td>{row.xg}</td>
-                    <td>{row.shots}</td>
-                    <td>{row.goals}</td>
+                    <td>{row.completed_passes}</td>
                   </tr>
                 ))}
               </tbody>
