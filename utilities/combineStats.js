@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import * as d3 from 'd3'
+
 const combineStats = (array) => {
   // create array from map produced from reducer that adds the shots per player
   const adder = Array.from(
@@ -9,13 +11,13 @@ const combineStats = (array) => {
     ),
     ([player_id, shots]) => ({ player_id, shots }),
   )
-  const newArray = []
+  const interimArray = []
   // loop through array and compbine with extra data
   adder.forEach((element) => {
     const initialData = array.find(
       (initialRecord) => initialRecord.player_id === element.player_id,
     )
-    newArray.push({
+    interimArray.push({
       player_id: element.player_id,
       player_name: initialData.player_name,
       team_first_color: initialData.team_first_color,
@@ -24,7 +26,9 @@ const combineStats = (array) => {
     })
   })
 
-  return newArray
+  return interimArray
+    .filter((element) => element.shots > 0)
+    .sort((x, y) => d3.ascending(x.shots, y.shots))
 }
 
 export default combineStats
