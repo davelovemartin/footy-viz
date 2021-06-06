@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import PropTypes from 'prop-types'
+import styles from './BarChart.module.scss'
 import Bar from '../Bar'
 import Chart from '../Chart'
 import dimensions from '../../utilities/dimensions'
@@ -19,6 +20,8 @@ const BarChart = (props) => {
     .domain(d3.range(data.length))
     .range([dimensions.boundedHeight, 0])
 
+  // determine axis generators
+
   const xAxisGenerator = d3.axisTop(xScale).ticks(d3.max(data, xAccessor))
 
   const yAxisGenerator = d3
@@ -27,7 +30,7 @@ const BarChart = (props) => {
     .tickSizeOuter(0)
 
   return (
-    <div className="bar-chart">
+    <div className={styles.barchart}>
       <Chart dimensions={dimensions}>
         {data.map((d, i) => (
           <Bar
@@ -36,7 +39,6 @@ const BarChart = (props) => {
             y={yScale(i)}
             width={xScale(xAccessor(d))}
             height={yScale.bandwidth()}
-            fill="cornflowerblue"
           />
         ))}
         <Axis dimensions={dimensions} generator={xAxisGenerator} />

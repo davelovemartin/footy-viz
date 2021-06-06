@@ -2,10 +2,10 @@ const dimensions = {
   width: 900,
   height: 1200,
   margin: {
-    top: 15,
+    top: 25,
     right: 15,
     bottom: 40,
-    left: 60,
+    left: 100,
   },
 }
 

@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
+import styles from './Bar.module.scss'
 
 const Bar = (props) => {
-  const { x, y, width, height, fill } = props
+  const { x, y, width, height } = props
 
-  return <rect x={x} y={y} width={width} height={height} fill={fill} />
+  return (
+    <rect className={styles.bar} x={x} y={y} width={width} height={height} />
+  )
 }
 
 Bar.propTypes = {
@@ -11,7 +14,6 @@ Bar.propTypes = {
   y: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  fill: PropTypes.string.isRequired,
 }
 
 export default Bar
