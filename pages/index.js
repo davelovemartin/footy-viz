@@ -26,6 +26,9 @@ export default function Home(props) {
   const xAccessor = (d) => d.shots
   const yAccessor = (d) => d.player_name
 
+  const description =
+    'A chart to show which players had the most shots in the knockout stages of the 2018 World Cup Finals'
+
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
     'areAllFiltersOn',
@@ -98,6 +101,9 @@ export default function Home(props) {
     <div className="container">
       <Head>
         <title>Footy Viz</title>
+        <meta charset="utf-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -111,10 +117,7 @@ export default function Home(props) {
       <main>
         <Container>
           <Section>
-            <SubTitle>
-              A chart to show which players had the most shots in the knockout
-              stages of the 2018 World Cup Finals
-            </SubTitle>
+            <SubTitle>{description}</SubTitle>
             <header>filters:</header>
             <ToggleList>
               <Toggle
