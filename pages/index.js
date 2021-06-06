@@ -9,9 +9,7 @@ import combineStats from '../utilities/combineStats'
 export async function getStaticProps() {
   const fetchPlayers = await fetch(
     `${
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : process.env.URL
+      process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
     }/api/players`,
   )
   const playerData = await fetchPlayers.json()
