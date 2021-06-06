@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-export default function combineStats(array) {
+const combineStats = (array) => {
+  // create array from map produced from reducer that adds the completed_passes per player
   const adder = Array.from(
     array.reduce(
       (accumulator, { player_id, completed_passes }) =>
@@ -12,7 +13,7 @@ export default function combineStats(array) {
     ([player_id, completed_passes]) => ({ player_id, completed_passes }),
   )
   const newArray = []
-
+  // loop through array and compbine with extra data
   adder.forEach((element) => {
     const initialData = array.find(
       (initialRecord) => initialRecord.player_id === element.player_id,
@@ -28,3 +29,5 @@ export default function combineStats(array) {
 
   return newArray
 }
+
+export default combineStats

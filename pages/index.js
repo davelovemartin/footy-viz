@@ -7,9 +7,13 @@ import Toggle from '../components/Toggle'
 import combineStats from '../utilities/combineStats'
 
 export async function getStaticProps() {
-  // @todo: error handling with try/catch
-  // @todo: handle paths in different environments
-  const fetchPlayers = await fetch('http://localhost:3000/api/players')
+  const fetchPlayers = await fetch(
+    `${
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : process.env.URL
+    }/api/players`,
+  )
   const playerData = await fetchPlayers.json()
 
   return { props: { playerData } }

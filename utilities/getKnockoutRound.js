@@ -1,4 +1,4 @@
-export default function getKnockoutRound(string) {
+const getKnockoutRound = (string) => {
   // I don't want to mess around with dates so a simple switch statement will suffice here
   switch (string) {
     case '30/06/2018 17:00':
@@ -37,3 +37,5 @@ export default function getKnockoutRound(string) {
       return 'unknown'
   }
 }
+
+export default getKnockoutRound
