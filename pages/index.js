@@ -5,27 +5,23 @@ import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
 import ToggleList from '../components/ToggleList'
 import Toggle from '../components/Toggle'
 import combineStats from '../utilities/combineStats'
+import getData from '../utilities/players'
 
 export async function getStaticProps() {
-  const fetchPlayers = await fetch(
-    `${
-      process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-    }/api/players`,
-  )
-  const playerData = await fetchPlayers.json()
+  const data = getData()
 
-  return { props: { playerData } }
+  return { props: { data } }
 }
 
 export default function Home(props) {
-  const { playerData } = props
+  const { data } = props
 
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
     'areAllFiltersOn',
     true,
   )
-  const [filteredData, setFilteredData] = useState(playerData.stats)
+  const [filteredData, setFilteredData] = useState(data)
   const [filterLastSixteen, setFilterLastSixteen] = useSetStateWithLocalStorage(
     'filterLastSixteen',
     true,
@@ -62,7 +58,7 @@ export default function Home(props) {
       setAreAllFiltersOn(false)
     }
     setFilteredData(
-      playerData.stats.filter(
+      data.filter(
         (stat) =>
           (stat.match_round === 'round of 16' && filterLastSixteen) ||
           (stat.match_round === 'quarter-finals' && filterQuarterFinals) ||
@@ -72,7 +68,7 @@ export default function Home(props) {
       ),
     )
   }, [
-    playerData,
+    data,
     filterLastSixteen,
     filterQuarterFinals,
     filterSemiFinals,
