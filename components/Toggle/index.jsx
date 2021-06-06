@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Toggle = (props) => {
   const { label, isToggleOn, onClick } = props
 
@@ -14,6 +16,12 @@ const Toggle = (props) => {
       </button>
     </li>
   )
+}
+
+Toggle.propTypes = {
+  label: PropTypes.string.isRequired,
+  isToggleOn: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default Toggle
