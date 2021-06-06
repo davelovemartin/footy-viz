@@ -1,16 +1,13 @@
 /* eslint-disable camelcase */
 const combineStats = (array) => {
-  // create array from map produced from reducer that adds the completed_passes per player
+  // create array from map produced from reducer that adds the shots per player
   const adder = Array.from(
     array.reduce(
-      (accumulator, { player_id, completed_passes }) =>
-        accumulator.set(
-          player_id,
-          (accumulator.get(player_id) || 0) + completed_passes,
-        ),
+      (accumulator, { player_id, shots }) =>
+        accumulator.set(player_id, (accumulator.get(player_id) || 0) + shots),
       new Map(),
     ),
-    ([player_id, completed_passes]) => ({ player_id, completed_passes }),
+    ([player_id, shots]) => ({ player_id, shots }),
   )
   const newArray = []
   // loop through array and compbine with extra data
@@ -23,7 +20,7 @@ const combineStats = (array) => {
       player_name: initialData.player_name,
       team_first_color: initialData.team_first_color,
       team_name: initialData.team_name,
-      completed_passes: element.completed_passes,
+      shots: element.shots,
     })
   })
 

@@ -5,7 +5,8 @@ import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
 import ToggleList from '../components/ToggleList'
 import Toggle from '../components/Toggle'
 import combineStats from '../utilities/combineStats'
-import getData from '../utilities/players'
+import getData from '../utilities/getData'
+import BarChart from '../components/BarChart'
 
 export async function getStaticProps() {
   const data = getData()
@@ -15,6 +16,9 @@ export async function getStaticProps() {
 
 export default function Home(props) {
   const { data } = props
+
+  const xAccessor = (d) => d.shots
+  const yAccessor = (d) => d.player_name
 
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
@@ -133,23 +137,11 @@ export default function Home(props) {
           </button>
         </section>
         <section>
-          {filteredData ? (
-            <table>
-              <tbody>
-                {combineStats(filteredData).map((row) => (
-                  <tr key={row.player_name + row.match_round}>
-                    <td>{row.match_round}</td>
-                    <td>{row.player_name}</td>
-                    <td>{row.team_name}</td>
-                    <td>{row.team_first_color}</td>
-                    <td>{row.completed_passes}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>loading</p>
-          )}
+          <BarChart
+            data={combineStats(filteredData)}
+            xAccessor={xAccessor}
+            yAccessor={yAccessor}
+          />
         </section>
       </main>
     </div>
