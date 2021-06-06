@@ -1,4 +1,6 @@
+@import 'variables';
+
 .barchart {
   overflow: scroll;
-  height: 500px;
+  height: $maxChartHeight;
 }

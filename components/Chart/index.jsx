@@ -4,7 +4,7 @@ const Chart = (props) => {
   const { dimensions, children } = props
 
   return (
-    <svg className="chart" width={dimensions.width} height={dimensions.height}>
+    <svg width={dimensions.width} height={dimensions.height}>
       <g
         transform={`translate(${dimensions.margin.left}, ${dimensions.margin.top})`}
       >
