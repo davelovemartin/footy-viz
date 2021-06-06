@@ -8,7 +8,10 @@ const Section = (props) => {
 }
 
 Section.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOf([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.object,
+  ]).isRequired,
 }
 
 export default Section
