@@ -1,0 +1,11 @@
+@import 'variables';
+
+.subtitle {
+  font-size: $h2;
+  font-weight: $heavy;
+  color: $black;
+
+  @media (max-width: $largeDesktop) {
+    font-size: $paragraph;
+  }
+}

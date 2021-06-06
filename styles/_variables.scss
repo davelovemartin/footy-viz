@@ -1,0 +1,48 @@
+//**********
+// colors
+//**********
+
+$black: #010101;
+$white: #fefefe;
+$grey: #676767;
+$blue: #1b365d;
+$stone: #d6d2c4;
+$lightGrey: #eee;
+
+$backgroundColor: $white;
+$colorPrimary: $black;
+$colorSecondary: $grey;
+
+$buttonColor: $blue;
+$buttonAltColor: $stone;
+$buttonDisabled: $grey;
+$buttonDisabledAlternative: $lightGrey;
+
+//**********
+// typography
+//**********
+
+$xlFontSize: 2.618rem;
+$largeFontSize: 1.618rem;
+$regularFontSize: 1rem;
+
+$fontFamily: 'Open Sans', sans-serif;
+$alternateFontFamily: 'Open Sans Condensed', sans-serif;
+
+$heavy: 700;
+$light: 300;
+
+$h1: $xlFontSize;
+$h2: $largeFontSize;
+$h3: $regularFontSize;
+$paragraph: $regularFontSize;
+$button: $regularFontSize;
+
+//**********
+// layout
+//**********
+
+$bodyMaxWidth: 90vw;
+$largeDesktop: 1370px;
+$desktop: 1200px;
+$buttonWidth: 10rem;

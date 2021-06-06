@@ -1,0 +1,50 @@
+@use "sass:math";
+@import 'variables';
+@import 'mixins';
+
+.toggle {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
+
+  button {
+    @include button;
+    padding: 0;
+    span {
+      display: inline-block;
+      width: math.div($buttonWidth, 2);
+      height: 1.75rem;
+      line-height: 1.8;
+    }
+  }
+
+  @media (max-width: $largeDesktop) {
+    display: block;
+    height: auto;
+
+    .togglelabel,
+    button {
+      display: block;
+    }
+
+    .togglelabel {
+      margin-bottom: 0.0125rem;
+    }
+
+    button {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+.toggleOn {
+  background-color: $buttonColor;
+  color: $buttonAltColor;
+  border-right: 0;
+}
+
+.togglelabel {
+  margin-right: 0.25rem;
+  padding: 0.5rem;
+}

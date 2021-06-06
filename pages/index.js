@@ -7,6 +7,12 @@ import Toggle from '../components/Toggle'
 import combineStats from '../utilities/combineStats'
 import getData from '../utilities/getData'
 import BarChart from '../components/BarChart'
+import Header from '../components/Header'
+import Title from '../components/Title'
+import Container from '../components/Container'
+import Section from '../components/Section'
+import SubTitle from '../components/SubTitle'
+import Button from '../components/Button'
 
 export async function getStaticProps() {
   const data = getData()
@@ -93,56 +99,62 @@ export default function Home(props) {
       <Head>
         <title>Footy Viz</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:wght@300&display=swap"
+          rel="stylesheet"
+        />
       </Head>
-      <header>
-        <h1 className="title">Footy Viz</h1>
-        <p>Stats from the knockout stages of the 2018 World Cup.</p>
-      </header>
+      <Header>
+        <Title />
+      </Header>
       <main>
-        <section className="filters">
-          <header>filters</header>
-          <ToggleList>
-            <Toggle
-              onClick={() => setFilterLastSixteen(!filterLastSixteen)}
-              label="round of 16"
-              isToggleOn={filterLastSixteen}
+        <Container>
+          <Section>
+            <SubTitle>
+              A chart to show which players had the most shots in the knockout
+              stages of the 2018 World Cup Finals
+            </SubTitle>
+            <header>filters:</header>
+            <ToggleList>
+              <Toggle
+                onClick={() => setFilterLastSixteen(!filterLastSixteen)}
+                label="round of 16"
+                isToggleOn={filterLastSixteen}
+              />
+              <Toggle
+                onClick={() => setFilterQuarterFinals(!filterQuarterFinals)}
+                label="quarter-finals"
+                isToggleOn={filterQuarterFinals}
+              />
+              <Toggle
+                onClick={() => setFilterSemiFinals(!filterSemiFinals)}
+                label="semi-finals"
+                isToggleOn={filterSemiFinals}
+              />
+              <Toggle
+                onClick={() => setFilterPlayOff(!filterPlayOff)}
+                label="play off"
+                isToggleOn={filterPlayOff}
+              />
+              <Toggle
+                onClick={() => setFilterFinal(!filterFinal)}
+                label="final"
+                isToggleOn={filterFinal}
+              />
+            </ToggleList>
+            <Button onClick={handleShowAll} disabled={areAllFiltersOn}>
+              show all rounds
+            </Button>
+          </Section>
+          <Section>
+            <BarChart
+              data={combineStats(filteredData)}
+              xAccessor={xAccessor}
+              yAccessor={yAccessor}
             />
-            <Toggle
-              onClick={() => setFilterQuarterFinals(!filterQuarterFinals)}
-              label="quarter-finals"
-              isToggleOn={filterQuarterFinals}
-            />
-            <Toggle
-              onClick={() => setFilterSemiFinals(!filterSemiFinals)}
-              label="semi-finals"
-              isToggleOn={filterSemiFinals}
-            />
-            <Toggle
-              onClick={() => setFilterPlayOff(!filterPlayOff)}
-              label="play off"
-              isToggleOn={filterPlayOff}
-            />
-            <Toggle
-              onClick={() => setFilterFinal(!filterFinal)}
-              label="final"
-              isToggleOn={filterFinal}
-            />
-          </ToggleList>
-          <button
-            type="button"
-            onClick={handleShowAll}
-            disabled={areAllFiltersOn}
-          >
-            show all rounds
-          </button>
-        </section>
-        <section>
-          <BarChart
-            data={combineStats(filteredData)}
-            xAccessor={xAccessor}
-            yAccessor={yAccessor}
-          />
-        </section>
+          </Section>
+        </Container>
       </main>
     </div>
   )

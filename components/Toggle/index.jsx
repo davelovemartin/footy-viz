@@ -1,18 +1,22 @@
 import PropTypes from 'prop-types'
+import styles from './Toggle.module.scss'
 
 const Toggle = (props) => {
   const { label, isToggleOn, onClick } = props
 
   return (
-    <li>
-      <span id={`toggle--${label}`}>{label}</span>
+    <li className={styles.toggle}>
+      <span id={`toggle--${label}`} className={styles.togglelabel}>
+        {label}:
+      </span>
       <button
         aria-labelledby={`toggle--${label}`}
         aria-pressed={isToggleOn}
         onClick={onClick}
         type="button"
       >
-        {isToggleOn ? 'on' : 'off'}
+        <span className={!isToggleOn ? styles.toggleOn : null}>on</span>
+        <span className={isToggleOn ? styles.toggleOn : null}>off</span>
       </button>
     </li>
   )

@@ -1,0 +1,9 @@
+@import 'variables';
+
+body {
+  padding: 1rem;
+  max-width: $bodyMaxWidth;
+  margin: 0 auto;
+  font-family: $fontFamily;
+  background-color: $backgroundColor;
+}

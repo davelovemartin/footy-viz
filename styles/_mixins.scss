@@ -1,0 +1,17 @@
+@import 'variables';
+
+@mixin button {
+  border: 0.125rem solid $buttonColor;
+  background-color: $buttonAltColor;
+  border-radius: 0.25rem;
+  color: $buttonColor;
+  font-size: $button;
+  cursor: pointer;
+
+  &:disabled {
+    color: $buttonDisabled;
+    border-color: $buttonDisabled;
+    background-color: $buttonDisabledAlternative;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,18 @@
+@import 'variables';
+
+.title {
+  font-family: $alternateFontFamily;
+  font-size: $h1;
+  font-weight: $light;
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+  width: 11rem;
+  line-height: 1;
+  letter-spacing: -0.1rem;
+  color: $black;
+
+  span {
+    font-weight: 700;
+    color: $blue;
+  }
+}

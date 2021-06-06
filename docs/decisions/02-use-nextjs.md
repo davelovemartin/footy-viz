@@ -1,4 +1,4 @@
-# 1. Use Next.js
+# 2. Use Next.js
 
 Date: 2021-05-30
 

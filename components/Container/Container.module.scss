@@ -1,0 +1,22 @@
+@import 'variables';
+
+.container {
+  display: flex;
+
+  > :first-child {
+    flex-grow: 1;
+    padding-right: 3rem;
+
+    @media (max-width: $largeDesktop) {
+      padding-right: 1rem;
+    }
+  }
+
+  > :nth-child(2) {
+    flex-grow: 2;
+  }
+
+  @media (max-width: $desktop) {
+    display: block;
+  }
+}
