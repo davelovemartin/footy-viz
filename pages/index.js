@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
 import useSetStateWithLocalStorage from '../hooks/useSetStateWithLocalStorage'
 import ToggleList from '../components/ToggleList'
 import Toggle from '../components/Toggle'
@@ -24,6 +25,9 @@ export default function Home(props) {
 
   const xAccessor = (d) => d.shots
   const yAccessor = (d) => d.player_name
+
+  const description =
+    'A chart to show which players had the most shots in the knockout stages of the 2018 World Cup Finals'
 
   // set state for filters
   const [areAllFiltersOn, setAreAllFiltersOn] = useState(
@@ -95,16 +99,25 @@ export default function Home(props) {
 
   return (
     <>
+      <Head>
+        <title>Footy Viz</title>
+        <meta charSet="utf-8" />
+        <meta name="description" content="Footy Viz" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:wght@300&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <Header>
         <Title />
       </Header>
       <main>
         <Container>
           <Section>
-            <SubTitle>
-              A chart to show which players had the most shots in the knockout
-              stages of the 2018 World Cup Finals
-            </SubTitle>
+            <SubTitle>{description}</SubTitle>
             <header>filters:</header>
             <ToggleList>
               <Toggle
